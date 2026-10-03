@@ -33,7 +33,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://www.fbgcdn.com" crossorigin>
-<link rel="preload" as="image" type="image/webp" media="(min-width:861px)" href="/assets/sali/hero-d1200.webp" imagesrcset="/assets/sali/hero-d800.webp 800w, /assets/sali/hero-d1200.webp 1200w" imagesizes="(max-width:1280px) 44vw, 560px" fetchpriority="high">
+<link rel="preload" as="image" type="image/webp" media="(min-width:861px)" href="/assets/sali/hero-tiski-d1100.webp" imagesrcset="/assets/sali/hero-tiski-d720.webp 720w, /assets/sali/hero-tiski-d1100.webp 1100w" imagesizes="(max-width:1280px) 44vw, 560px" fetchpriority="high">
 <link rel="preload" as="image" type="image/webp" media="(max-width:860px)" href="/assets/sali/hero-sali-m1170.webp" imagesrcset="/assets/sali/hero-sali-m828.webp 828w, /assets/sali/hero-sali-m1170.webp 1170w" imagesizes="100vw" fetchpriority="high">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Hanken+Grotesk:wght@400;500;600;700&display=swap">
 <script type="application/ld+json">
@@ -1511,6 +1511,26 @@ html .glf-button.mrow:active{color:var(--ink)!important}
 @media (max-width:960px){.facts .wrap{grid-template-columns:repeat(3,minmax(0,1fr))}.fact{border-bottom:0;border-right:1px solid var(--line-d);padding:20px 16px}.fact:first-child{padding-left:0}.fact:last-child{border-right:0}}
 @media (max-width:700px){.facts .wrap{grid-template-columns:1fr}.fact,.fact:first-child{border-right:0;border-bottom:1px solid var(--line-d);padding:18px 0}.fact:last-child{border-bottom:0}}
 
+/* Työpöydän hero: terävä tiskikuva, pizza ja hintamerkki */
+.hv-pizza,.hv-badge{display:none}
+@media (min-width:861px){
+  .hv .frame::after{background:linear-gradient(180deg,rgba(14,15,11,.22) 0%,rgba(14,15,11,0) 26%,rgba(14,15,11,0) 62%,rgba(14,15,11,.5) 100%),radial-gradient(50% 32% at 50% 52%,rgba(255,214,120,.10),transparent 70%)}
+  .hv-img{object-position:50% 40%}
+  .hv-pizza{display:block;position:absolute;z-index:2;width:48%;height:auto;left:-19%;bottom:-8%;filter:drop-shadow(0 34px 44px rgba(0,0,0,.65));pointer-events:none}
+  .hv-badge{display:flex;flex-direction:column;align-items:flex-start;position:absolute;z-index:3;right:-22px;top:9%;padding:16px 22px 14px;border-radius:20px;background:var(--olive);color:var(--white);box-shadow:0 24px 50px -18px rgba(0,0,0,.8),0 0 0 1px rgba(251,251,248,.12);transform:rotate(3deg)}
+  .hv-badge small{font:700 .72rem/1 var(--body);letter-spacing:.16em;text-transform:uppercase;opacity:.85}
+  .hv-badge span{font:500 .85rem/1.2 var(--body);margin-top:8px}
+  .hv-badge b{font:900 2.4rem/.95 var(--display);letter-spacing:.01em}
+}
+@media (min-width:861px) and (prefers-reduced-motion:no-preference){
+  .hv-pizza{animation:pizzain 1.1s .35s var(--ease) both, pizzaspin 60s linear 1.5s infinite}
+  .hv-badge{animation:badgein .8s .7s var(--ease) both}
+}
+@media (min-width:861px) and (max-width:1100px){.hv-pizza{width:42%;left:-12%}.hv-badge{right:-10px}}
+@keyframes pizzain{from{opacity:0;transform:translate(-30px,40px) rotate(-40deg) scale(.85)}to{opacity:1;transform:none}}
+@keyframes pizzaspin{to{transform:rotate(360deg)}}
+@keyframes badgein{from{opacity:0;transform:translateY(16px) rotate(3deg)}to{opacity:1;transform:rotate(3deg)}}
+
 </style>
 </head>
 <body>
@@ -1570,9 +1590,11 @@ html .glf-button.mrow:active{color:var(--ink)!important}
         <div class="frame">
           <picture>
             <source media="(max-width:860px)" srcset="/assets/sali/hero-sali-m828.webp 828w, /assets/sali/hero-sali-m1170.webp 1170w" sizes="100vw">
-            <img class="hv-img" src="/assets/sali/hero-d1200.webp" srcset="/assets/sali/hero-d800.webp 800w, /assets/sali/hero-d1200.webp 1200w" sizes="(max-width:860px) 92vw, (max-width:1280px) 44vw, 560px" alt="Matsalen i Ravintola Mäkelän Kulma på Mäkelänkatu" width="1200" height="1500" fetchpriority="high" decoding="async">
+            <img class="hv-img" src="/assets/sali/hero-tiski-d1100.webp" srcset="/assets/sali/hero-tiski-d720.webp 720w, /assets/sali/hero-tiski-d1100.webp 1100w" sizes="(max-width:860px) 92vw, (max-width:1280px) 44vw, 560px" alt="Matsalen i Ravintola Mäkelän Kulma på Mäkelänkatu" width="1100" height="1375" fetchpriority="high" decoding="async">
           </picture>
         </div>
+        <img class="hv-pizza" src="/assets/ruoka/pizza-600.webp" alt="" width="600" height="600" loading="lazy" decoding="async">
+        <div class="hv-badge"><small>Pizzor</small><span>från</span><b>11,90 €</b></div>
       </div>
     </div>
   </section>
