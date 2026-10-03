@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Mäkelän Kulma – hallintapaneeli</title>
+<link rel="icon" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800;900&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0E0F0B;--coal:#16180F;--panel:#1C1F15;--white:#FBFBF8;--mist:#C4C6BB;--grey:#8B8D82;--line:rgba(251,251,248,.13);--olive:#6E7B3B;--olive-hi:#A3B262;--red:#E58C76;--green:#9DD47A;
+--display:"Big Shoulders Display","Arial Narrow",sans-serif;--sans:"Hanken Grotesk",system-ui,sans-serif;color-scheme:dark}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--sans);background:var(--ink);color:var(--white);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:var(--olive-hi)}
+h1,h2,h3{font-family:var(--display);font-weight:800;line-height:1;text-transform:uppercase;letter-spacing:.01em}
+input,select,textarea,button{font:inherit;color:inherit}
+input,select,textarea{background:var(--ink);border:1px solid var(--line);border-radius:10px;padding:11px 12px;width:100%;transition:border-color .2s}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--olive-hi)}
+label{display:block;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--mist);margin-bottom:7px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--olive);background:var(--olive);color:#fff;font-weight:700;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;padding:12px 20px;border-radius:999px;cursor:pointer;transition:.2s;text-decoration:none}
+.btn:hover{background:var(--olive-hi);border-color:var(--olive-hi);color:var(--ink)}
+.btn.ghost{background:transparent;color:var(--white);border-color:var(--line)}
+.btn.ghost:hover{background:var(--white);color:var(--ink);border-color:var(--white)}
+.btn.small{padding:8px 14px;font-size:.7rem}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+:focus-visible{outline:2px solid var(--olive-hi);outline-offset:3px}
+
+#login{min-height:100vh;display:grid;place-items:center;padding:24px}
+#login .card{width:min(100%,390px);background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:34px}
+#login img{height:58px;margin-bottom:18px}
+#login h1{font-size:2rem;margin-bottom:6px}
+#login p{color:var(--mist);margin-bottom:24px;font-size:.92rem}
+.field{margin-bottom:14px}
+
+header{position:sticky;top:0;z-index:10;background:rgba(14,15,11,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:66px}
+.brand{display:flex;align-items:center;gap:12px;font:800 1.2rem/1 var(--display);text-transform:uppercase}
+.brand img{height:40px}
+.brand span{color:var(--olive-hi)}
+nav.tabs{border-bottom:1px solid var(--line);background:var(--coal)}
+nav.tabs .wrap{display:flex;gap:4px;overflow-x:auto}
+nav.tabs button{background:none;border:0;border-bottom:2px solid transparent;padding:15px 16px;font-weight:700;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mist);cursor:pointer;white-space:nowrap}
+nav.tabs button[aria-selected="true"]{color:var(--olive-hi);border-bottom-color:var(--olive-hi)}
+section.view{display:none;padding:32px 0 90px}
+section.view.active{display:block}
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:22px}
+.head h2{font-size:2.4rem}
+.muted{color:var(--mist);font-size:.9rem}
+
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:22px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px}
+.card .k{font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mist);font-weight:700}
+.card .v{font:900 2.6rem/1 var(--display);margin-top:10px;font-variant-numeric:tabular-nums}
+.card .d{font-size:.8rem;color:var(--grey);margin-top:6px}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px;margin-bottom:16px}
+.box>strong{display:block;margin-bottom:6px}
+.bars{display:flex;align-items:flex-end;gap:3px;height:200px;margin-top:16px;border-bottom:1px solid var(--line)}
+.bars div{flex:1;background:linear-gradient(180deg,var(--olive-hi),rgba(110,123,59,.35));border-radius:4px 4px 0 0;min-height:2px;position:relative}
+.bars div:hover{background:var(--white)}
+.bars div:hover::after{content:attr(data-t);position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);background:#000;border:1px solid var(--line);padding:5px 8px;border-radius:6px;font-size:.72rem;white-space:nowrap;z-index:2}
+table{width:100%;border-collapse:collapse}
+th,td{text-align:left;padding:10px 6px;border-bottom:1px solid var(--line);font-size:.92rem}
+th{font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mist)}
+td:not(:first-child),th:not(:first-child){text-align:right;font-variant-numeric:tabular-nums}
+.three{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:16px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.block{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;margin-bottom:16px}
+.block h3{font-size:1.5rem;margin-bottom:6px}
+.block .muted{margin-bottom:16px}
+textarea{min-height:92px;resize:vertical}
+.hrow{display:grid;grid-template-columns:110px 1fr;gap:10px;align-items:center;margin-bottom:8px}
+.hrow span{font-weight:600;color:var(--mist)}
+.switch{display:flex;align-items:center;gap:10px;margin-bottom:14px;cursor:pointer;font-weight:600}
+.switch input{width:20px;height:20px;accent-color:var(--olive-hi)}
+.saved{font-size:.8rem;color:var(--grey)}
+#toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,20px);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:13px 20px;font-weight:600;opacity:0;transition:.3s;z-index:50;pointer-events:none}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+#toast.err{border-color:var(--red);color:var(--red)}
+#toast.ok{border-color:var(--green)}
+.spinner{display:inline-block;width:15px;height:15px;border:2px solid rgba(255,255,255,.3);border-top-color:currentColor;border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (max-width:860px){.cards{grid-template-columns:1fr 1fr}.three,.grid2{grid-template-columns:1fr}.head h2{font-size:2rem}}
+</style>
+</head>
+<body>
+
+<!-- ============ KIRJAUTUMINEN ============ -->
+<div id="login">
+  <form class="card" id="loginForm">
+    <img src="/assets/logo-white.png" alt="Mäkelän Kulma" width="119" height="80">
+    <h1>Hallintapaneeli</h1>
+    <p>Kirjaudu sisään henkilökunnan tunnuksella.</p>
+    <div class="field"><label for="email">Sähköposti</label><input type="email" id="email" required autocomplete="username"></div>
+    <div class="field"><label for="password">Salasana</label><input type="password" id="password" required autocomplete="current-password"></div>
+    <button class="btn" style="width:100%" id="loginBtn">Kirjaudu</button>
+    <p id="loginErr" style="color:var(--red);margin-top:14px;display:none"></p>
+  </form>
+</div>
+
+<!-- ============ PANEELI ============ -->
+<div id="app" hidden>
+  <header><div class="wrap">
+    <span class="brand"><img src="/assets/logo-white.png" alt="" width="119" height="80"> <span>·</span> hallinta</span>
+    <div style="display:flex;gap:10px;align-items:center">
+      <a class="btn ghost small" href="/" target="_blank" rel="noopener">Avaa sivusto</a>
+      <button class="btn ghost small" id="logout">Kirjaudu ulos</button>
+    </div>
+  </div></header>
+
+  <nav class="tabs"><div class="wrap">
+    <button data-view="stats" aria-selected="true">Tilastot</button>
+    <button data-view="hours" aria-selected="false">Aukiolo &amp; tiedote</button>
+    <button data-view="content" aria-selected="false">Sisältö</button>
+  </div></nav>
+
+  <!-- ---------- TILASTOT ---------- -->
+  <section class="view active" id="view-stats"><div class="wrap">
+    <div class="head">
+      <div><h2>Kävijätilastot</h2><p class="muted">Ei evästeitä eikä IP-osoitteita. Kävijä tunnistetaan päivittäin vaihtuvalla tunnisteella.</p></div>
+      <div style="width:170px"><label for="range">Aikaväli</label>
+        <select id="range"><option value="7">7 päivää</option><option value="30" selected>30 päivää</option><option value="90">90 päivää</option></select>
+      </div>
+    </div>
+    <div class="cards">
+      <div class="card"><div class="k">Tänään</div><div class="v" id="s-today">–</div><div class="d" id="s-today-v"></div></div>
+      <div class="card"><div class="k">Eilen</div><div class="v" id="s-yday">–</div><div class="d" id="s-yday-v"></div></div>
+      <div class="card"><div class="k">7 päivää</div><div class="v" id="s-week">–</div><div class="d" id="s-week-d"></div></div>
+      <div class="card"><div class="k">Koko jakso</div><div class="v" id="s-period">–</div><div class="d" id="s-period-v"></div></div>
+    </div>
+    <div class="box"><strong>Kävijät päivittäin</strong><span class="muted">Vie hiiri pylvään päälle nähdäksesi päivän luvut.</span><div class="bars" id="chart"></div></div>
+    <div class="three">
+      <div class="box"><strong>Suosituimmat näkymät</strong>
+        <table><thead><tr><th>Sivu</th><th>Kävijät</th><th>Näytöt</th></tr></thead><tbody id="t-pages"></tbody></table></div>
+      <div class="box"><strong>Mistä tultiin</strong>
+        <table><thead><tr><th>Lähde</th><th>Näytöt</th></tr></thead><tbody id="t-refs"></tbody></table></div>
+      <div class="box"><strong>Laitteet</strong>
+        <table><thead><tr><th>Laite</th><th>Näytöt</th></tr></thead><tbody id="t-devices"></tbody></table></div>
+    </div>
+  </div></section>
+
+  <!-- ---------- AUKIOLO & TIEDOTE ---------- -->
+  <section class="view" id="view-hours"><div class="wrap">
+    <div class="head">
+      <div><h2>Aukiolo &amp; tiedote</h2><p class="muted">Kirjoita ajat muodossa 10:30–22:00. Yli puolenyön menevä aika, esim. 10:30–04:00, toimii oikein. "Avoinna nyt" -tila päivittyy sivulle automaattisesti.</p></div>
+      <button class="btn" data-save>Tallenna</button>
+    </div>
+    <div class="grid2">
+      <div class="block"><h3>Aukioloajat</h3><p class="muted">Jätä tyhjäksi tai kirjoita "suljettu", jos ravintola on kiinni.</p>
+        <div class="hrow"><span>Maanantai</span><input data-k="hours.mon"></div>
+        <div class="hrow"><span>Tiistai</span><input data-k="hours.tue"></div>
+        <div class="hrow"><span>Keskiviikko</span><input data-k="hours.wed"></div>
+        <div class="hrow"><span>Torstai</span><input data-k="hours.thu"></div>
+        <div class="hrow"><span>Perjantai</span><input data-k="hours.fri"></div>
+        <div class="hrow"><span>Lauantai</span><input data-k="hours.sat"></div>
+        <div class="hrow"><span>Sunnuntai</span><input data-k="hours.sun"></div>
+      </div>
+      <div class="block"><h3>Tiedote</h3><p class="muted">Näkyy sivun ylälaidassa vihreänä palkkina, esim. poikkeusaukiolot tai juhlapyhät.</p>
+        <label class="switch"><input type="checkbox" id="n-active" data-k="notice.active"> Näytä tiedote sivulla</label>
+        <div class="field"><label for="n-text">Tiedotteen teksti</label><textarea id="n-text" data-k="notice.text" placeholder="Jouluaattona avoinna klo 10:30–15:00."></textarea></div>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- ---------- SISÄLTÖ ---------- -->
+  <section class="view" id="view-content"><div class="wrap">
+    <div class="head">
+      <div><h2>Sivun sisältö</h2><p class="muted">Etusivun tekstit ja yhteystiedot.</p></div>
+      <button class="btn" data-save>Tallenna</button>
+    </div>
+    <div class="grid2">
+      <div class="block"><h3>Etusivun yläosa</h3>
+        <div class="field"><label>Pieni ylärivi</label><input data-k="hero.eyebrow"></div>
+        <div class="field"><label>Otsikko, rivi 1</label><input data-k="hero.line1"></div>
+        <div class="field"><label>Otsikko, rivi 2</label><input data-k="hero.line2"></div>
+        <div class="field"><label>Otsikko, rivi 3</label><input data-k="hero.line3"></div>
+        <div class="field"><label>Esittelylause</label><textarea data-k="hero.lead"></textarea></div>
+      </div>
+      <div class="block"><h3>Yhteystiedot</h3>
+        <div class="field"><label>Puhelin</label><input data-k="info.phone"></div>
+        <div class="field"><label>Sähköposti</label><input data-k="info.email" type="email"></div>
+        <div class="field"><label>Osoite</label><input data-k="info.address"></div>
+        <h3 style="margin-top:22px">Meistä</h3>
+        <div class="field"><label>Meistä-teksti</label><textarea data-k="intro.body"></textarea></div>
+      </div>
+    </div>
+  </div></section>
+</div>
+
+<div id="toast" role="status"></div>
+
+<script type="module">
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
+// ====== ASETUKSET: täytä nämä kaksi ======
+const SUPABASE_URL = "https://PROJEKTI.supabase.co";
+const SUPABASE_ANON_KEY = "PASTE_ANON_KEY";
+// =========================================
+
+const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const $ = (s) => document.querySelector(s);
+const $$ = (s) => [...document.querySelectorAll(s)];
+const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+function toast(msg, type = "ok") {
+  const t = $("#toast"); t.textContent = msg; t.className = "show " + type;
+  clearTimeout(toast._t); toast._t = setTimeout(() => (t.className = ""), 3200);
+}
+
+/* ---------------- kirjautuminen ---------------- */
+$("#loginForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const btn = $("#loginBtn"); btn.disabled = true; btn.innerHTML = '<span class="spinner"></span>';
+  const { error } = await sb.auth.signInWithPassword({ email: $("#email").value.trim(), password: $("#password").value });
+  btn.disabled = false; btn.textContent = "Kirjaudu";
+  if (error) { $("#loginErr").style.display = "block"; $("#loginErr").textContent = "Kirjautuminen ei onnistunut. Tarkista sähköposti ja salasana."; return; }
+  start();
+});
+$("#logout").addEventListener("click", async () => { await sb.auth.signOut(); location.reload(); });
+sb.auth.getSession().then(({ data }) => { if (data.session) start(); });
+
+async function start() {
+  $("#login").style.display = "none";
+  $("#app").hidden = false;
+  await Promise.all([loadStats(), loadContent()]);
+}
+
+/* ---------------- välilehdet ---------------- */
+$$("nav.tabs button").forEach((b) => b.addEventListener("click", () => {
+  $$("nav.tabs button").forEach((x) => x.setAttribute("aria-selected", x === b));
+  $$(".view").forEach((v) => v.classList.toggle("active", v.id === "view-" + b.dataset.view));
+}));
+
+/* ---------------- tilastot ---------------- */
+$("#range").addEventListener("change", loadStats);
+const NIMI = { "/": "Etusivu", "/menu": "Menu" };
+
+async function loadStats() {
+  const { data } = await sb.auth.getSession();
+  const r = await fetch("/api/stats?days=" + $("#range").value, { headers: { Authorization: "Bearer " + data.session?.access_token } });
+  if (!r.ok) { toast("Tilastoja ei saatu haettua", "err"); return; }
+  const s = await r.json();
+  const S = s.summary;
+  $("#s-today").textContent = S.today.visitors ?? 0;
+  $("#s-today-v").textContent = (S.today.views ?? 0) + " sivunäyttöä";
+  $("#s-yday").textContent = S.yesterday.visitors ?? 0;
+  $("#s-yday-v").textContent = (S.yesterday.views ?? 0) + " sivunäyttöä";
+  $("#s-week").textContent = S.week_visitors ?? 0;
+  const diff = S.prev_week_views ? Math.round(((S.week_views - S.prev_week_views) / S.prev_week_views) * 100) : null;
+  $("#s-week-d").textContent = diff === null ? S.week_views + " sivunäyttöä" : (diff >= 0 ? "+" : "") + diff + " % edelliseen viikkoon";
+  $("#s-period").textContent = S.period_visitors ?? 0;
+  $("#s-period-v").textContent = (S.period_views ?? 0) + " sivunäyttöä";
+
+  const max = Math.max(1, ...s.daily.map((d) => Number(d.visitors)));
+  $("#chart").innerHTML = s.daily.map((d) => {
+    const h = Math.round((Number(d.visitors) / max) * 100);
+    const pvm = d.day.slice(8) + "." + d.day.slice(5, 7) + ".";
+    return `<div style="height:${h}%" data-t="${pvm} – ${d.visitors} kävijää, ${d.views} näyttöä"></div>`;
+  }).join("") || '<p class="muted">Ei vielä tietoja.</p>';
+  const empty = (n) => `<tr><td colspan="${n}" class="muted">Ei vielä tietoja.</td></tr>`;
+  $("#t-pages").innerHTML = s.pages.map((p) => `<tr><td>${esc(NIMI[p.path] || p.path)}</td><td>${p.visitors}</td><td>${p.views}</td></tr>`).join("") || empty(3);
+  $("#t-refs").innerHTML = (s.referrers || []).map((p) => `<tr><td>${esc(p.source)}</td><td>${p.views}</td></tr>`).join("") || empty(2);
+  $("#t-devices").innerHTML = s.devices.map((d) => `<tr><td>${esc({ mobile: "Puhelin", desktop: "Tietokone", tablet: "Tabletti" }[d.device] || d.device)}</td><td>${d.views}</td></tr>`).join("") || empty(2);
+}
+
+/* ---------------- sisältö (kaikki välilehdet) ---------------- */
+let DATA = {};
+function fill() {
+  $$("[data-k]").forEach((el) => {
+    const [key, f] = el.dataset.k.split(".");
+    const v = DATA[key]?.[f];
+    if (el.type === "checkbox") el.checked = !!v; else el.value = v ?? "";
+  });
+}
+function collect() {
+  const out = {};
+  $$("[data-k]").forEach((el) => {
+    const [key, f] = el.dataset.k.split(".");
+    (out[key] ||= { ...(DATA[key] || {}) })[f] = el.type === "checkbox" ? el.checked : el.value.trim();
+  });
+  return out;
+}
+async function loadContent() {
+  const { data, error } = await sb.from("site_content").select("*");
+  if (error) return toast("Sisältöä ei saatu haettua", "err");
+  DATA = {}; (data || []).forEach((r) => (DATA[r.key] = r.value || {}));
+  fill();
+}
+
+$$("[data-save]").forEach((btn) => btn.addEventListener("click", async () => {
+  const label = btn.textContent; btn.disabled = true; btn.innerHTML = '<span class="spinner"></span>';
+  try {
+    const all = collect();
+    const rows = Object.entries(all).map(([key, value]) => ({ key, value }));
+    const { error } = await sb.from("site_content").upsert(rows, { onConflict: "key" });
+    if (error) throw error;
+    DATA = all;
+    toast("Tallennettu. Muutokset näkyvät sivulla.");
+  } catch (e) { toast("Tallennus epäonnistui: " + (e.message || e), "err"); }
+  btn.disabled = false; btn.textContent = label;
+}));
+</script>
+</body>
+</html>
