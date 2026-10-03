@@ -1492,6 +1492,20 @@ footer .grid{grid-template-columns:1.3fr 1fr 1fr 1.2fr}
 }
 @media (hover:none) and (prefers-reduced-motion:reduce){.cat2.is-active .cat-img{transform:none}}
 
+/* ===== GloriaFood-tyylien kumoaminen (heidän CSS latautuu meidän jälkeemme) ===== */
+html .glf-button{margin:0;text-shadow:none;filter:none!important;background-clip:border-box;vertical-align:middle;box-sizing:border-box}
+html .glf-button.btn{display:inline-flex;padding:0 1.6em;border-radius:999px;font:700 .92rem/1 var(--body);letter-spacing:.08em;text-align:center}
+html .top .glf-button.btn{padding:0 1.3em;font-size:.8rem}
+html .bar .glf-button.btn{font-size:1rem;letter-spacing:.1em}
+html .glf-button.btn-white{color:var(--ink)!important;background-color:var(--white)}
+@media (hover:hover){html .glf-button.btn-white:hover{color:#fff!important}}
+html .glf-button.mrow{display:flex;padding:18px 4px;border-radius:8px;background:transparent none;box-shadow:none;color:var(--ink)!important;font:inherit;font-size:1rem;text-align:left}
+@media (hover:hover){html .glf-button.mrow:hover{color:var(--ink)!important;padding-inline:14px;background:var(--paper)}}
+html .glf-button.mrow:active{color:var(--ink)!important}
+@media (max-width:560px){html .glf-button.fact-cta{display:none}}
+@media (max-width:900px){html .top .glf-button.btn{display:none}}
+@media (max-width:900px){.top.scrolled{background:var(--ink)}}
+
 </style>
 </head>
 <body>
@@ -1862,11 +1876,16 @@ footer .grid{grid-template-columns:1.3fr 1fr 1fr 1.2fr}
 
   /* ---------- yläpalkki, edistyminen, mobiilipalkki ---------- */
   var top=$('#top'),bar=$('#bar'),prog=$('#progress'),totop=$('#totop'),tick=false;
+  /* alapalkki näkyy vasta, kun heron Tilaa nyt -nappi on poistunut näkyvistä */
+  var heroCtaVisible=true, heroCta=document.querySelector('.hero .cta-hot');
+  if(heroCta&&'IntersectionObserver' in window){
+    new IntersectionObserver(function(es){heroCtaVisible=es[0].isIntersecting;frame();}).observe(heroCta);
+  } else heroCtaVisible=false;
   function frame(){
     var y=scrollY,h=document.documentElement.scrollHeight-innerHeight;
     if(prog)prog.style.transform='scaleX('+(h>0?Math.min(1,y/h):0)+')';
     top.classList.toggle('scrolled',y>24||root.dataset.page!=='etusivu');
-    if(bar)bar.classList.toggle('show',y>280);
+    if(bar)bar.classList.toggle('show',y>280&&!heroCtaVisible);
     if(totop)totop.classList.toggle('show',y>900);
     tick=false;
   }
