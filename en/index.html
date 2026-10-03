@@ -1505,6 +1505,11 @@ html .glf-button.mrow:active{color:var(--ink)!important}
 @media (max-width:560px){html .glf-button.fact-cta{display:none}}
 @media (max-width:900px){html .top .glf-button.btn{display:none}}
 @media (max-width:900px){.top.scrolled{background:var(--ink)}}
+/* tietorivi ilman nappia: 3 saraketta, kapealla 1 */
+.facts .wrap{grid-template-columns:repeat(3,minmax(0,1fr))}
+.fact:last-child{border-right:0}
+@media (max-width:960px){.facts .wrap{grid-template-columns:repeat(3,minmax(0,1fr))}.fact{border-bottom:0;border-right:1px solid var(--line-d);padding:20px 16px}.fact:first-child{padding-left:0}.fact:last-child{border-right:0}}
+@media (max-width:700px){.facts .wrap{grid-template-columns:1fr}.fact,.fact:first-child{border-right:0;border-bottom:1px solid var(--line-d);padding:18px 0}.fact:last-child{border-bottom:0}}
 
 </style>
 </head>
@@ -1560,7 +1565,6 @@ html .glf-button.mrow:active{color:var(--ink)!important}
           <span class="glf-button btn btn-olive cta-hot" role="button" tabindex="0" data-glf-cuid="" data-glf-ruid="cb7ab3cc-7ade-4888-86b4-bdd8cac7b31e"><svg class="bag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V7a3 3 0 0 1 6 0v1"/></svg>Order now <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
           <a class="btn btn-line" href="#/menu">View menu</a>
         </div>
-        <p class="status" data-status aria-live="polite"><span class="dot"></span><span class="txt">Mon–Thu & Sun 10:30–22 · Fri–Sat 10:30–04</span></p>
       </div>
       <div class="hv" aria-hidden="true">
         <div class="frame">
@@ -1578,7 +1582,6 @@ html .glf-button.mrow:active{color:var(--ink)!important}
       <div class="fact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg><div><small>Address</small><span data-c="info.address">Mäkelänkatu 45, unit 12, 00550 Helsinki</span></div></div>
       <div class="fact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><div><small>Open today</small><span data-today>10:30–22:00</span></div></div>
       <div class="fact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg><div><small>Phone</small><a href="tel:+358458461846" data-c-tel>045 846 1846</a></div></div>
-      <span class="glf-button btn btn-olive fact-cta" role="button" tabindex="0" data-glf-cuid="" data-glf-ruid="cb7ab3cc-7ade-4888-86b4-bdd8cac7b31e">Order online</span>
     </div>
   </section>
 
@@ -1676,18 +1679,6 @@ html .glf-button.mrow:active{color:var(--ink)!important}
     </div>
   </section>
 
-  <section class="closer" aria-labelledby="closer-h">
-    <div class="wrap">
-      <div>
-        <h2 id="closer-h">Hungry? Your food will be ready soon.</h2>
-        <p>Order online for pickup or delivery. Delivery is free for orders over 17 €, and on Fridays and Saturdays we are open until 4 am.</p>
-      </div>
-      <div class="cta-row">
-        <span class="glf-button btn btn-white" role="button" tabindex="0" data-glf-cuid="" data-glf-ruid="cb7ab3cc-7ade-4888-86b4-bdd8cac7b31e">Order now <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-        <a class="btn btn-line" href="tel:+358458461846" data-c-tel>Call 045 846 1846</a>
-      </div>
-    </div>
-  </section>
 </div>
 
 <!-- ================= MENU ================= -->
